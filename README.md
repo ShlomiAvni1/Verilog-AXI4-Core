@@ -52,7 +52,7 @@ Simulation Strategy: The testbench acts as a "Man-in-the-Middle," intercepting t
 The waveform below demonstrates a **Write Transaction** where the testbench forces AWREADY and WREADY low.
 
 * **Key Observation:** The Master FSM holds VALID high and waits patiently until the stall is released, ensuring no data loss.  
-  \!\[Write Transaction with Stalls\](./images/waveform\_write\_stall.png)
+  \!\[Write Transaction with Stalls\](images/waveform\_write\_stall.png)
 
 ### **Scenario B: Arbitration & High Throughput**
 
@@ -60,7 +60,7 @@ This capture demonstrates two advanced capabilities:
 
 1. **Arbitration (Left):** Simultaneous Write/Read requests are handled gracefully.  
 2. **Back-to-Back (Right):** A Read request issued immediately after a Write completes is executed with **minimal latency (1 clock cycle)**, maximizing bus throughput.  
-   \!\[Arbitration and Back-to-Back Test\](./images/waveform\_arbitration.png)
+   \!\[Arbitration and Back-to-Back Test\](images/waveform\_arbitration.png)
 
 ## **5\. Interface Definition**
 
