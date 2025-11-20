@@ -16,14 +16,16 @@ The project focuses on **robustness and protocol compliance**. It abstracts the 
 
 The system connects a Master to a Slave via a verification harness. The harness acts as an interconnect, allowing the testbench to intercept signals and inject deterministic stalls for verification purposes.
 
-graph TD  
-    subgraph tb\_system \[System Testbench\]  
-        direction LR  
-        User\[User Logic / CPU Model\] \--\>|Simple Cmds| Master\[AXI Master\]  
-        Master \--\>|AXI Protocol| MITM{Stall Injection Logic}  
-        MITM \--\>|AXI Protocol| Slave\[AXI Slave\]  
-        Slave \--\>|Register Map| Regs\[Registers 0-3\]  
-    end
+```mermaid
+graph TD
+subgraph tb_system [System Testbench]
+  direction LR
+  User[User Logic / CPU Model] -->|Simple Cmds| Master[AXI Master]
+  Master -->|AXI Protocol| MITM{Stall Injection Logic}
+  MITM -->|AXI Protocol| Slave[AXI Slave]
+  Slave -->|Register Map| Regs[Registers 0-3]
+end
+```
 
 ## **3\. Hardware Implementation**
 
@@ -86,16 +88,18 @@ This capture demonstrates two advanced capabilities:
 
 ## **6\. Project Structure**
 
-Verilog-AXI4-Core/  
-├── rtl/  
-│   ├── axi\_master.v        \# Synthesizable Master logic  
-│   └── axi\_slave.v         \# Synthesizable Slave logic  
-├── tb/  
-│   └── tb\_system.v         \# Advanced System Testbench  
-├── images/  
-│   ├── waveform\_write\_stall.png  
-│   └── waveform\_arbitration.png  
+```text
+Verilog-AXI4-Core/
+├── rtl/
+│   ├── axi_master.v      # Synthesizable Master logic
+│   └── axi_slave.v       # Synthesizable Slave logic
+├── tb/
+│   └── tb_system.v       # Advanced System Testbench
+├── images/
+│   ├── waveform_write_stall.png
+│   └── waveform_arbitration.png
 └── README.md
+```
 
 ## **7\. Tools Used**
 
