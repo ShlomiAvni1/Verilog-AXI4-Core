@@ -67,7 +67,8 @@ graph LR
     end
 
     %% Apply invisible style to legend nodes
-    class L1,L2,L3,L4,L5,L6 invisible;```
+    class L1,L2,L3,L4,L5,L6 invisible;
+    ```
 
 ## **3\. Hardware Implementation**
 
