@@ -16,60 +16,11 @@ The project focuses on **robustness and protocol compliance**. It abstracts the 
 
 The system connects a Master to a Slave via a verification harness. The harness acts as an interconnect, allowing the testbench to intercept signals and inject deterministic stalls for verification purposes.
 
-```mermaid
-graph LR
-    %% --- Styling Definitions ---
-    classDef master fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
-    classDef slave fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
-    classDef harness fill:#fce4ec,stroke:#880e4f,stroke-width:2px,stroke-dasharray: 5 5;
-    classDef tb_logic fill:#e0e0e0,stroke:#333,stroke-width:1px;
-    %% Invisible style for Legend nodes
-    classDef invisible fill:none,stroke:none,color:#00000000; 
+## 2. Architecture
 
-    %% --- Main System ---
-    subgraph TB_Environment [System Verification Environment]
-        direction TB
-        
-        Driver[Test Stimulus Generator]:::tb_logic
-        
-        subgraph DUT_System [DUT Interconnect]
-            direction LR
-            Master["AXI Master<br/>(FSM Controller)"]:::master
-            Interconnect{{"Verification Harness<br/>Stall Injection Logic"}}:::harness
-            Slave["AXI Slave<br/>(4x32-bit Reg Map)"]:::slave
-        end
+![AXI4-Lite Verification Harness](images/block_diagram.jpeg)
 
-        Driver -->|Start R/W & Addr| Master
-        Driver -.->|"Force Stall Control"| Interconnect
-    end
-
-    %% --- Connections ---
-    %% Data Flow (Thick Lines)
-    Master ==>|AWADDR / WDATA| Interconnect
-    Interconnect ==>|Gated AW/W Valid| Slave
-    Master ==>|ARADDR| Interconnect
-    Interconnect ==>|Gated AR Valid| Slave
-
-    %% Response Flow (Dotted Lines)
-    Slave -.->|BRESP / RDATA| Interconnect
-    Interconnect -.->|BRESP / RDATA| Master
-
-    %% Ready Flow (Dotted Lines)
-    Slave -.->|Original Ready| Interconnect
-    Interconnect -.->|"Gated Ready<br/>(Backpressure)"| Master
-
-    %% --- Legend ---
-    subgraph Legend [Legend / Key]
-        direction TB
-        L1((.)) ==>|Data & Address Path| L2((.))
-        L3((.)) -.->|Control, Resp & Stalls| L4((.))
-        L5((.)) -->|Testbench Stimulus| L6((.))
-    end
-
-    %% Apply invisible style to legend nodes
-    class L1,L2,L3,L4,L5,L6 invisible;
-
-```
+The system connects a Master to a Slave via a verification harness. The harness acts as an interconnect, allowing the testbench to intercept signals and inject deterministic stalls for verification purposes.
 
 ## **3\. Hardware Implementation**
 
