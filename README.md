@@ -16,7 +16,6 @@ The project focuses on **robustness and protocol compliance**. It abstracts the 
 
 The system connects a Master to a Slave via a verification harness. The harness acts as an interconnect, allowing the testbench to intercept signals and inject deterministic stalls for verification purposes.
 
-## 2. Architecture
 
 ![AXI4-Lite Verification Harness](images/block_diagram.jpeg)
 
